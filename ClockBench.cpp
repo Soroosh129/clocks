@@ -135,6 +135,14 @@ int main(int argc, char** argv)
    #ifdef CLOCK_MONOTONIC_COARSE
    do_clock(CLOCK_MONOTONIC_COARSE);
    #endif
+
+   #ifdef CLOCK_TAI
+   do_clock(CLOCK_TAI);
+   #endif
+
+   #ifdef CLOCK_PROCESS_CPUTIME_ID
+   do_clock(CLOCK_PROCESS_CPUTIME_ID);
+   #endif
 #endif
 
 
