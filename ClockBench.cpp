@@ -116,32 +116,58 @@ int main(int argc, char** argv)
    do_clock(CLOCK_REALTIME);
    #endif
 
+   #ifdef CLOCK_MONOTONIC
+   do_clock(CLOCK_MONOTONIC);
+   #endif
+
    #ifdef CLOCK_REALTIME_COARSE
    do_clock(CLOCK_REALTIME_COARSE);
+   #endif
+   
+   /* High-resolution timer from the CPU.  */
+   #ifdef CLOCK_PROCESS_CPUTIME_ID
+   do_clock(CLOCK_PROCESS_CPUTIME_ID);
+   #endif
+
+   /* Thread-specific CPU-time clock.  */
+   #ifdef CLOCK_THREAD_CPUTIME_ID
+   do_clock(CLOCK_THREAD_CPUTIME_ID);
    #endif
 
    #ifdef CLOCK_REALTIME_HR
    do_clock(CLOCK_REALTIME_HR);
    #endif
 
-   #ifdef CLOCK_MONOTONIC
-   do_clock(CLOCK_MONOTONIC);
-   #endif
-
    #ifdef CLOCK_MONOTONIC_RAW
    do_clock(CLOCK_MONOTONIC_RAW);
    #endif
 
+   #ifdef CLOCK_REALTIME_COARSE
+   do_clock(CLOCK_REALTIME_COARSE);
+   #endif
+    
    #ifdef CLOCK_MONOTONIC_COARSE
    do_clock(CLOCK_MONOTONIC_COARSE);
    #endif
 
-   #ifdef CLOCK_TAI
-   do_clock(CLOCK_TAI);
+   /* Monotonic system-wide clock that includes time spent in suspension.  */
+   #ifdef CLOCK_BOOTTIME
+   do_clock(CLOCK_BOOTTIME);
    #endif
 
-   #ifdef CLOCK_PROCESS_CPUTIME_ID
-   do_clock(CLOCK_PROCESS_CPUTIME_ID);
+   /* Like CLOCK_REALTIME but also wakes suspended system.  */
+   #ifdef CLOCK_REALTIME_ALARM
+   do_clock(CLOCK_REALTIME_ALARM);
+   #endif
+    
+   /* Like CLOCK_BOOTTIME but also wakes suspended system.  */
+   #ifdef CLOCK_BOOTTIME_ALARM
+   do_clock(CLOCK_BOOTTIME_ALARM);
+   #endif
+
+   /* Like CLOCK_REALTIME but in International Atomic Time.  */
+   #ifdef CLOCK_TAI
+   do_clock(CLOCK_TAI);
    #endif
 #endif
 
