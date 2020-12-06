@@ -31,21 +31,22 @@ gcc -o clocks clocks.c ${LIBRT} && ./clocks
 echo;echo "ClockBench.cpp"
 g++ -O3 -ggdb ${LIBRT} ${RDTSCP} -o ClockBench ClockBench.cpp && ${TASKSET} ./ClockBench $*
 
-if [[ -z ${JAVA_HOME} ]]; then
-   echo
-   echo "Set JAVA_HOME to run Java benchmark"
-else
-   # java side
-   export PATH=$JAVA_HOME/bin:$PATH
-   rm -f SysTime.h
-   rm -f SysTime.class
-   rm -f ClockBench.class
-   rm -f libsystime.${SOEXT}
-   javac -classpath . SysTime.java
-   javah -classpath . SysTime
-   javac -classpath . ClockBench.java
-   #gcc -O3 -o libsystime.so -shared -Wl,-soname,systime.so -I${JAVA_HOME}/include -I${JAVA_HOME}/include/${JAVAINC} -lc -fPIC ${LIBRT} SysTime.c
-   gcc -O3 -o libsystime.${SOEXT} -shared -I${JAVA_HOME}/include -I${JAVA_HOME}/include/${JAVAINC} -lc -fPIC ${LIBRT} SysTime.c
-   echo;echo -n "ClockBench.java - "; java -version 2>&1 | grep "java version"
-   (export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH;java -Djava.library.path=. ${RDTSCP} -server -classpath . ClockBench $*)
-fi
+# FIXME: Skip Java benchmarks for now
+# if [[ -z ${JAVA_HOME} ]]; then
+#    echo
+#    echo "Set JAVA_HOME to run Java benchmark"
+# else
+#    # java side
+#    export PATH=$JAVA_HOME/bin:$PATH
+#    rm -f SysTime.h
+#    rm -f SysTime.class
+#    rm -f ClockBench.class
+#    rm -f libsystime.${SOEXT}
+#    javac -classpath . SysTime.java
+#    javah -classpath . SysTime
+#    javac -classpath . ClockBench.java
+#    #gcc -O3 -o libsystime.so -shared -Wl,-soname,systime.so -I${JAVA_HOME}/include -I${JAVA_HOME}/include/${JAVAINC} -lc -fPIC ${LIBRT} SysTime.c
+#    gcc -O3 -o libsystime.${SOEXT} -shared -I${JAVA_HOME}/include -I${JAVA_HOME}/include/${JAVAINC} -lc -fPIC ${LIBRT} SysTime.c
+#    echo;echo -n "ClockBench.java - "; java -version 2>&1 | grep "java version"
+#    (export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH;java -Djava.library.path=. ${RDTSCP} -server -classpath . ClockBench $*)
+# fi

@@ -111,7 +111,6 @@ int main(int argc, char** argv)
    printf("%25s\t", "Method");
    printf("%s\t%7s\t%7s\t%7s\t%7s\t%7s\n", "samples", "min", "max", "avg", "median", "stdev");
 
-#if _POSIX_TIMERS > 0
    #ifdef CLOCK_REALTIME
    do_clock(CLOCK_REALTIME);
    #endif
@@ -169,7 +168,6 @@ int main(int argc, char** argv)
    #ifdef CLOCK_TAI
    do_clock(CLOCK_TAI);
    #endif
-#endif
 
 
    {

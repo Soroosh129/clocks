@@ -59,7 +59,6 @@ int main(int argc, char** argv )
    printf("%25s\t%15s\t%15s\t", "gettimeofday","1,000", commaprint(tv.tv_sec));
    printf("%15s\n", commaprint(tv.tv_usec*1000));
    
-#if _POSIX_TIMERS > 0   
    #ifdef CLOCK_REALTIME
    do_clock(CLOCK_REALTIME);
    #endif
@@ -117,8 +116,6 @@ int main(int argc, char** argv )
    #ifdef CLOCK_TAI
    do_clock(CLOCK_TAI);
    #endif
-   
-#endif
 
    return 0;
 }
